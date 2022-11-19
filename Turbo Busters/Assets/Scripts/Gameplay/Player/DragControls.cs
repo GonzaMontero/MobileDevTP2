@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class DragControls : MonoBehaviour
 {
@@ -10,10 +11,17 @@ public class DragControls : MonoBehaviour
     public Rigidbody2D rigidBody;
     public LineRenderer lineRenderer;
 
+    public UnityEvent onDragReleaseEvent;
+
     private Vector3 dragStartPos;
 
     private Touch touch;
 
+    private void Start()
+    {
+        if (onDragReleaseEvent == null)
+            onDragReleaseEvent = new UnityEvent();
+    }
 
     private void Update()
     {
@@ -66,5 +74,10 @@ public class DragControls : MonoBehaviour
         Vector3 clampedForce = Vector3.ClampMagnitude(force, maxDrag) * power;
 
         rigidBody.AddForce(clampedForce, ForceMode2D.Impulse);
+    }
+
+    public void OnHitEvent()
+    {
+        rigidBody.constraints = RigidbodyConstraints2D.FreezePosition;
     }
 }
