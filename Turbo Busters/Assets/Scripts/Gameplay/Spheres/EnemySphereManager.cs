@@ -18,6 +18,7 @@ public class EnemySphereManager : MonoBehaviour
             go = Instantiate(enemySpherePrefab);
             go.transform.position = camTransform.position + (Random.insideUnitSphere * 30);
             go.transform.position = new Vector3(go.transform.position.x, go.transform.position.y, 0f);
+            go.transform.parent = transform;
         }
     }
 }

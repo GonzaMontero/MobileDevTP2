@@ -21,6 +21,8 @@ public class DragControls : MonoBehaviour
     {
         if (onDragReleaseEvent == null)
             onDragReleaseEvent = new UnityEvent();
+
+        OnHitEvent();
     }
 
     private void Update()

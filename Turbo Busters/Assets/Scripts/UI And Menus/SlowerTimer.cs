@@ -33,11 +33,11 @@ public class SlowerTimer : MonoBehaviour
 
     private void Update()
     {
-        totalTime += Time.deltaTime;
-
         if (!shouldCountTime) return;
 
-        if(timeRemaining > 0)
+        totalTime += Time.deltaTime;
+
+        if (timeRemaining > 0)
         {
             timeRemaining -= Time.deltaTime;
             timerLine.fillAmount = timeRemaining / totalTimeGiven;
@@ -46,9 +46,10 @@ public class SlowerTimer : MonoBehaviour
         {
             gameUIParent.SetActive(false);
 
-
             loseGameParent.SetActive(true);
             endGameText.text = "Total Time -" + totalTime;
+
+            shouldCountTime = false;
         }
     }
 
