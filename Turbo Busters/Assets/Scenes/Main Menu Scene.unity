@@ -1206,7 +1206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e794cbeef3a41a549b1016c5ba47767e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentNeonColor: 1
+  currentNeonColor: 0
   currentVolume: 0.5
 --- !u!1 &579799345
 GameObject:
