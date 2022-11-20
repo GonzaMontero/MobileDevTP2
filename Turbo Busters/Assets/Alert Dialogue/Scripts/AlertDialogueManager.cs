@@ -2,6 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+class AndroidPluginCallback : AndroidJavaProxy
+{
+    public AndroidPluginCallback() : base("com.example.warning_plugin.PluginCallback") { }
+
+    public bool OnPositive(string message)
+    {
+        return true;
+    }
+
+    public bool OnNegative(string message)
+    {
+        return false;
+    }
+}
+
 public class AlertDialogueManager : SingletonBase<AlertDialogueManager>
 {
     AndroidJavaClass unityClass;
@@ -13,12 +28,6 @@ public class AlertDialogueManager : SingletonBase<AlertDialogueManager>
     {
         InitializePlugins("package com.example.warning_plugin.PluginClass");
         CreateAlert();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void InitializePlugins(string pluginName)
@@ -36,7 +45,7 @@ public class AlertDialogueManager : SingletonBase<AlertDialogueManager>
 
     private void CreateAlert()
     {
-        pluginInstance.Call("CreateAlert");
+        pluginInstance.Call("CreateAlert", new AndroidPluginCallback());
     }
 
     public void ShowAlert()
