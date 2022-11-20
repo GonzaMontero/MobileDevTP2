@@ -10,6 +10,8 @@ public class PlayerManager : SingletonBase<PlayerManager>
 
     public GameObject[] characterPrefabList;
 
+    public GameObject selectedGO;
+
     public bool wasModified = false;
 
     private void Start()

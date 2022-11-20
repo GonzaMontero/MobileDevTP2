@@ -5,8 +5,6 @@ using UnityEngine;
 [System.Serializable]
 public class SavePlayerData
 {
-    public int isFirst = 0;
-
     public float volume;
     public SettingsManager.neonColors colorSelected;
 
@@ -20,26 +18,20 @@ public class BaseManager : SingletonBase<BaseManager>
     SettingsManager sm;
 
     SavePlayerData savedPlayer;
-
-    int firstBoot = 1;
     
     void Start()
     {
         pm = PlayerManager.instance;
         sm = SettingsManager.instance;
 
-        var playerData = JsonUtility.FromJson<SavePlayerData>(PlayerPrefs.GetString("SavedPlayer"));
-
-        if(playerData.isFirst != firstBoot)
-        {
-            pm.wasModified = false;
-        }
-        else
+        if (PlayerPrefs.HasKey("SavedPlayer"))
         {
             pm.wasModified = true;
+            var playerData = JsonUtility.FromJson<SavePlayerData>(PlayerPrefs.GetString("SavedPlayer"));
             pm.charactersBought = playerData.boughtItems;
             sm.currentNeonColor = playerData.colorSelected;
             sm.currentVolume = playerData.volume;
+
         }
     }
 
@@ -47,7 +39,6 @@ public class BaseManager : SingletonBase<BaseManager>
     {
         savedPlayer = new SavePlayerData()
         {
-            isFirst = 1,
             volume = sm.currentVolume,
             colorSelected = sm.currentNeonColor,
             boughtItems = pm.charactersBought
