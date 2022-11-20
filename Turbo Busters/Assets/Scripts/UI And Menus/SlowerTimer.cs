@@ -46,6 +46,8 @@ public class SlowerTimer : MonoBehaviour
         {
             gameUIParent.SetActive(false);
 
+            PlayerManager.instance.currentPoints += totalPoints;
+
             loseGameParent.SetActive(true);
             endGameText.text = "Total Time -" + totalTime;
 
@@ -58,7 +60,7 @@ public class SlowerTimer : MonoBehaviour
         timeRemaining = 0;
         shouldCountTime = true;
 
-        totalPoints += 100;
+        totalPoints += 10;
         pointsText.text = totalPoints.ToString();
     }
 

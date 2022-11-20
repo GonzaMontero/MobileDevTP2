@@ -25,8 +25,6 @@ public class BaseManager : SingletonBase<BaseManager>
         pm = PlayerManager.instance;
         sm = SettingsManager.instance;
 
-        PlayerPrefs.DeleteAll();
-
         if (PlayerPrefs.HasKey("SavedPlayer"))
         {
             pm.wasModified = true;

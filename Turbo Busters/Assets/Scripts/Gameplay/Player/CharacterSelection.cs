@@ -111,6 +111,7 @@ public class CharacterSelection : MonoBehaviour
                 buyButton.onClick.AddListener(delegate
                 {
                     pm.charactersBought[itemNumber] = PlayerManager.BuyState.Bought;
+                    AchievementManager.instance.FirstUnlockAchievement();
                     ReturnToSelection();
                     UpdateButtons();
                 });
@@ -124,6 +125,7 @@ public class CharacterSelection : MonoBehaviour
                 buyButton.onClick.AddListener(delegate
                 {
                     pm.charactersBought[itemNumber] = PlayerManager.BuyState.Bought;
+                    AchievementManager.instance.SecondUnlockAchievement();
                     ReturnToSelection();
                     UpdateButtons();
                 });
@@ -137,6 +139,7 @@ public class CharacterSelection : MonoBehaviour
                 buyButton.onClick.AddListener(delegate
                 {
                     pm.charactersBought[itemNumber] = PlayerManager.BuyState.Bought;
+                    AchievementManager.instance.ThirdUnlockAchievement();
                     ReturnToSelection();
                     UpdateButtons();
                 });
