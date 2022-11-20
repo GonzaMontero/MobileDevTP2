@@ -8,6 +8,8 @@ public class PlayerManager : SingletonBase<PlayerManager>
 
     public Dictionary<int, BuyState> charactersBought = new Dictionary<int, BuyState>();
 
+    public int currentPoints;
+
     public GameObject[] characterPrefabList;
 
     public GameObject selectedGO;

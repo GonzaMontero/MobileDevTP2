@@ -9,6 +9,7 @@ public class SavePlayerData
     public SettingsManager.neonColors colorSelected;
 
     public Dictionary<int, PlayerManager.BuyState> boughtItems;
+    public int points;
 }
 
 
@@ -24,11 +25,14 @@ public class BaseManager : SingletonBase<BaseManager>
         pm = PlayerManager.instance;
         sm = SettingsManager.instance;
 
+        PlayerPrefs.DeleteAll();
+
         if (PlayerPrefs.HasKey("SavedPlayer"))
         {
             pm.wasModified = true;
             var playerData = JsonUtility.FromJson<SavePlayerData>(PlayerPrefs.GetString("SavedPlayer"));
             pm.charactersBought = playerData.boughtItems;
+            pm.currentPoints = playerData.points;
             sm.currentNeonColor = playerData.colorSelected;
             sm.currentVolume = playerData.volume;
 
@@ -41,7 +45,8 @@ public class BaseManager : SingletonBase<BaseManager>
         {
             volume = sm.currentVolume,
             colorSelected = sm.currentNeonColor,
-            boughtItems = pm.charactersBought
+            boughtItems = pm.charactersBought,
+            points = pm.currentPoints
         };
 
         PlayerPrefs.SetString("SavedPlayer", JsonUtility.ToJson(savedPlayer));
