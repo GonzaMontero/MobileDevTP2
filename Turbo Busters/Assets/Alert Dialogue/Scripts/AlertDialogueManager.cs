@@ -14,6 +14,7 @@ class AndroidPluginCallback : AndroidJavaProxy
     public bool OnNegative(string message)
     {
         return false;
+
     }
 }
 
