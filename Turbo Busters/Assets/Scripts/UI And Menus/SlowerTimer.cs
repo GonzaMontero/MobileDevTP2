@@ -33,9 +33,10 @@ public class SlowerTimer : MonoBehaviour
 
     private void Update()
     {
-        if (!shouldCountTime) return;
-
-        totalTime += Time.deltaTime;
+        if (!shouldCountTime)
+        {
+            totalTime += Time.deltaTime;
+        }
 
         if (timeRemaining > 0)
         {
@@ -57,16 +58,15 @@ public class SlowerTimer : MonoBehaviour
 
     public void OnCollisionEvent()
     {
-        timeRemaining = 0;
+        timeRemaining = totalTimeGiven;
         shouldCountTime = true;
 
         totalPoints += 10;
         pointsText.text = totalPoints.ToString();
-    }
 
-    public void OnDragRelease()
-    {
-        timeRemaining = totalTimeGiven;
-        shouldCountTime = false;
+        if (totalPoints > 100)
+            totalTimeGiven -= 1.5f;
+        if(totalTimeGiven > 200)
+            totalTimeGiven -= 1.5f;
     }
 }

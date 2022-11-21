@@ -25,11 +25,4 @@ public class PlayerManager : SingletonBase<PlayerManager>
         charactersBought.Add(2, BuyState.NotBought);
         charactersBought.Add(3, BuyState.NotBought);
     }
-
-
-    void OnBuyScreenLoad()
-    {
-
-    }
-
 }

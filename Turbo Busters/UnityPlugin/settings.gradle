@@ -9,3 +9,5 @@ dependencyResolutionManagement {
 rootProject.name = "UnityPlugin"
 include ':app'
 include ':warning_plugin'
+include ':logger_plugin'
+include ':log_reader_plugin'

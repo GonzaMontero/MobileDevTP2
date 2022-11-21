@@ -9,7 +9,6 @@ public class PluginClass {
 
     private static  final String LOGTAG ="UnityPlugin";
     private static Activity unityActivity;
-
     AlertDialog.Builder builder;
 
     public static void recieveUnityActivity(Activity tActivity){

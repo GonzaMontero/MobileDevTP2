@@ -27,15 +27,18 @@ public class AlertDialogueManager : SingletonBase<AlertDialogueManager>
     // Start is called before the first frame update
     void Start()
     {
-        InitializePlugins("package com.example.warning_plugin.PluginClass");
+        InitializePlugins("com.example.warning_plugin.PluginClass");
         CreateAlert();
     }
 
     private void InitializePlugins(string pluginName)
     {
         unityClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
+
         unityActivity = unityClass.GetStatic<AndroidJavaObject>("currentActivity");
+
         pluginInstance = new AndroidJavaObject(pluginName);
+
         if(pluginInstance==null)
         {
             Debug.LogError("Plugin Instance is Null");

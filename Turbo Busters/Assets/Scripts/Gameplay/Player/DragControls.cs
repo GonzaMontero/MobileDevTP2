@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class DragControls : MonoBehaviour
 {
     public float power = 10f;
-    public float maxDrag = 5f;
+    public float maxDrag = 15f;
 
     public Rigidbody2D rigidBody;
     public LineRenderer lineRenderer;
@@ -22,7 +22,7 @@ public class DragControls : MonoBehaviour
         if (onDragReleaseEvent == null)
             onDragReleaseEvent = new UnityEvent();
 
-        OnHitEvent();
+        rigidBody.constraints = RigidbodyConstraints2D.FreezePosition;
     }
 
     private void Update()
@@ -33,14 +33,17 @@ public class DragControls : MonoBehaviour
 
             if(touch.phase == TouchPhase.Began)
             {
+                Debug.Log("Started Dragging");
                 DragStart();
             }
             if(touch.phase == TouchPhase.Moved)
             {
+                Debug.Log("Still Dragging");
                 Dragging();
             }
             if (touch.phase == TouchPhase.Ended)
             {
+                Debug.Log("Ended Dragging");
                 DragRelease();
             }
 
@@ -49,7 +52,7 @@ public class DragControls : MonoBehaviour
 
     void DragStart()
     {
-        dragStartPos = Camera.main.ScreenToWorldPoint(touch.position);
+        dragStartPos = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x,touch.position.y));
         dragStartPos.z = 0f;
 
         lineRenderer.positionCount = 1;
@@ -58,7 +61,7 @@ public class DragControls : MonoBehaviour
 
     void Dragging()
     {
-        Vector3 draggingPos = Camera.main.ScreenToWorldPoint(touch.position);
+        Vector3 draggingPos = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y));
         draggingPos.z = 0f;
 
         lineRenderer.positionCount = 2;
@@ -67,14 +70,17 @@ public class DragControls : MonoBehaviour
 
     void DragRelease()
     {
+        onDragReleaseEvent?.Invoke();
+
         lineRenderer.positionCount = 0;
 
-        Vector3 dragReleasePosition = Camera.main.ScreenToWorldPoint(touch.position);
+        Vector3 dragReleasePosition = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y));
         dragReleasePosition.z = 0f;
 
         Vector3 force = dragStartPos - dragReleasePosition;
         Vector3 clampedForce = Vector3.ClampMagnitude(force, maxDrag) * power;
 
+        rigidBody.constraints = RigidbodyConstraints2D.None;
         rigidBody.AddForce(clampedForce, ForceMode2D.Impulse);
     }
 
