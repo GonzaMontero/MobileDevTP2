@@ -10,153 +10,185 @@ public class CharacterSelection : MonoBehaviour
 
     public MainMenuButtonFunctions mainMenuButtonFunctions;
 
-    public GameObject prntChooseCharacters;
-    public Button[] selectionButtons;
+    public Button buySelectButton;
+    public TextMeshProUGUI buySelectButtonText;
 
-    public GameObject prntBuySelection;
-    public Button buyButton;
-    public Button backButton;
+    public Button foward;
+    public Button backward;
 
-    public TextMeshProUGUI buyText;
-    public TextMeshProUGUI currentMoneyText;
-    public TextMeshProUGUI requiredMoneyText;
+    public TextMeshProUGUI nameText;
+    public TextMeshProUGUI updateText;
+
+    int currentSelection;
 
     void Start()
     {
         pm = PlayerManager.instance;
-        int i = 0;
 
-        foreach(Button b in selectionButtons)
+        foward.onClick.AddListener(GoFoward);
+        backward.onClick.AddListener(GoBackwards);
+
+        UpdateData(0);
+    }
+
+    public void GoFoward()
+    {
+        currentSelection++;
+        if (currentSelection > 3)
+            currentSelection = 0;
+        UpdateData(currentSelection);
+    }
+
+    public void GoBackwards()
+    {
+        currentSelection--;
+        if (currentSelection < 0)
+            currentSelection = 3;
+        UpdateData(currentSelection);
+    }
+
+    public void UpdateData(int i)
+    {
+       
+        bool bought = (pm.charactersBought[i] == PlayerManager.BuyState.Bought);
+
+        switch (i)
         {
-            if(pm.charactersBought[i] == PlayerManager.BuyState.NotBought)
-            {
-                int y = i;
-                b.onClick.AddListener(delegate { OpenBuyPanel(y); });
-            }
-            else
-            {
-                int y = i;
-                b.transform.GetComponentInChildren<TextMeshProUGUI>().text = "Select";
-                b.onClick.AddListener(delegate {
-                    pm.selectedGO = pm.characterPrefabList[y];
-                    mainMenuButtonFunctions.LoadScene("Main Game Scene"); 
-                });
-            }
-
-            i++;
-        }
-
-        backButton.onClick.AddListener(ReturnToSelection);
-    }
-
-    void UpdateButtons()
-    {
-        int i = 0;
-
-        foreach (Button b in selectionButtons)
-        {
-            if (pm.charactersBought[i] == PlayerManager.BuyState.NotBought)
-            {
-                b.onClick.AddListener(delegate { OpenBuyPanel(i); });
-            }
-            else
-            {
-                b.transform.GetComponentInChildren<TextMeshProUGUI>().text = "Select";
-                b.onClick.AddListener(delegate { mainMenuButtonFunctions.LoadScene("Main Game Scene"); });
-            }
-
-            i++;
-        }
-    }
-
-    public void ReturnToSelection()
-    {
-        if (!prntBuySelection.activeSelf) return;
-
-        prntBuySelection.SetActive(false);
-        prntChooseCharacters.SetActive(true);
-    }
-
-    public void GoToBuyPanel()
-    {
-        if (!prntChooseCharacters.activeSelf) return;
-
-        prntChooseCharacters.SetActive(false);
-        prntBuySelection.SetActive(true);
-    }
-
-    public void OpenBuyPanel(int buttonNumber)
-    {
-        CalculationsForBuildPanel(buttonNumber);
-        GoToBuyPanel();
-    }
-
-    public void CalculationsForBuildPanel(int itemNumber)
-    {
-        switch (itemNumber)
-        {
+            default:
             case 0:
-                buyText.text = "Buy - Circle";
-                currentMoneyText.text = "Current Money -" + pm.currentPoints.ToString();
-                requiredMoneyText.text = "Required Money - 500";
+                nameText.text = "Circle";
 
-                if (pm.currentPoints - 500 < 0) buyButton.enabled = false;
+                updateText.text = "Power - " + pm.characterPrefabList[i].GetComponent<DragControls>().power + "\n" +
+                    "Bought" + "\n" + "Price - 0" + "\n" + "Current Money - " + pm.currentPoints.ToString() + "Leftover - " +
+                    (pm.currentPoints - 0).ToString();
+
+                if (pm.charactersBought[i] == PlayerManager.BuyState.Bought)
+                {
+                    buySelectButtonText.text = "Select";
+
+                    buySelectButton.onClick.AddListener(delegate
+                    {
+                        pm.selectedGO = pm.characterPrefabList[i];
+                        mainMenuButtonFunctions.LoadScene("Main Game Scene");
+                    });
+                }
                 break;
             case 1:
-                buyText.text = "Buy - Square";
-                currentMoneyText.text = "Current Money -" + pm.currentPoints.ToString();
-                requiredMoneyText.text = "Required Money - 500";
+                nameText.text = "Square";   
 
-                if (pm.currentPoints - 500 < 0) buyButton.enabled = false;
-                buyButton.onClick.AddListener(delegate
+                if (bought)
                 {
-                    pm.charactersBought[itemNumber] = PlayerManager.BuyState.Bought;
-                    AchievementManager.instance.FirstUnlockAchievement();
-                    ReturnToSelection();
-                    UpdateButtons();
-                });
+                    updateText.text = "Power - " + pm.characterPrefabList[i].GetComponent<DragControls>().power + "\n" +
+                    "Bought" + "\n" + "Price - 500" + "\n" + "Current Money - " + pm.currentPoints.ToString() + "Leftover - " +
+                     (pm.currentPoints - 500).ToString();
+                }
+                else
+                {
+                    updateText.text = "Power - " + pm.characterPrefabList[i].GetComponent<DragControls>().power + "\n" +
+                    "Buy Now" + "\n" + "Price - 500" + "\n" + "Current Money - " + pm.currentPoints.ToString() + "Leftover - " +
+                    (pm.currentPoints - 500).ToString();
+                }
+
+
+                if (pm.charactersBought[i] == PlayerManager.BuyState.Bought)
+                {
+                    buySelectButtonText.text = "Select";
+
+                    buySelectButton.onClick.AddListener(delegate
+                    {
+                        pm.selectedGO = pm.characterPrefabList[i];
+                        mainMenuButtonFunctions.LoadScene("Main Game Scene");
+                    });
+                }
+                else
+                {
+                    if (pm.currentPoints - 500 >= 0)
+                    {
+                        buySelectButton.onClick.AddListener(delegate
+                        {
+                            pm.charactersBought[i] = PlayerManager.BuyState.Bought;
+                            UpdateData(i);
+                        });
+                    }
+                }
                 break;
             case 2:
-                buyText.text = "Buy - Triangle";
-                currentMoneyText.text = "Current Money -" + pm.currentPoints.ToString();
-                requiredMoneyText.text = "Required Money - 750";
+                nameText.text = "Triangle";
 
-                if (pm.currentPoints - 750 < 0) buyButton.enabled = false;
-                buyButton.onClick.AddListener(delegate
+                if (bought)
                 {
-                    pm.charactersBought[itemNumber] = PlayerManager.BuyState.Bought;
-                    AchievementManager.instance.SecondUnlockAchievement();
-                    ReturnToSelection();
-                    UpdateButtons();
-                });
+                    updateText.text = "Power - " + pm.characterPrefabList[i].GetComponent<DragControls>().power + "\n" +
+                    "Bought" + "\n" + "Price - 1000" + "\n" + "Current Money - " + pm.currentPoints.ToString() + "Leftover - " +
+                     (pm.currentPoints - 1000).ToString();
+                }
+                else
+                {
+                    updateText.text = "Power - " + pm.characterPrefabList[i].GetComponent<DragControls>().power + "\n" +
+                    "Buy Now" + "\n" + "Price - 1000" + "\n" + "Current Money - " + pm.currentPoints.ToString() + "Leftover - " +
+                    (pm.currentPoints - 1000).ToString();
+                }
+
+                if (pm.charactersBought[i] == PlayerManager.BuyState.Bought)
+                {
+                    buySelectButtonText.text = "Select";
+
+                    buySelectButton.onClick.AddListener(delegate
+                    {
+                        pm.selectedGO = pm.characterPrefabList[i];
+                        mainMenuButtonFunctions.LoadScene("Main Game Scene");
+                    });
+                }
+                else
+                {
+                    if (pm.currentPoints - 1000 >= 0)
+                    {
+                        buySelectButton.onClick.AddListener(delegate
+                        {
+                            pm.charactersBought[i] = PlayerManager.BuyState.Bought;
+                            UpdateData(i);
+                        });
+                    }
+                }
                 break;
             case 3:
-                buyText.text = "Buy - Star";
-                currentMoneyText.text = "Current Money -" + pm.currentPoints.ToString();
-                requiredMoneyText.text = "Required Money - 2000";
+                nameText.text = "Special";
 
-                if (pm.currentPoints - 2000 < 0) buyButton.enabled = false;
-                buyButton.onClick.AddListener(delegate
+                if (bought)
                 {
-                    pm.charactersBought[itemNumber] = PlayerManager.BuyState.Bought;
-                    AchievementManager.instance.ThirdUnlockAchievement();
-                    ReturnToSelection();
-                    UpdateButtons();
-                });
-                break;
-            default:
-                buyText.text = "Buy - Circle";
-                currentMoneyText.text = "Current Money -" + pm.currentPoints.ToString();
-                requiredMoneyText.text = "Required Money - 500";
+                    updateText.text = "Power - " + pm.characterPrefabList[i].GetComponent<DragControls>().power + "\n" +
+                    "Bought" + "\n" + "Price - 2000" + "\n" + "Current Money - " + pm.currentPoints.ToString() + "Leftover - " +
+                     (pm.currentPoints - 2000).ToString();
+                }
+                else
+                {
+                    updateText.text = "Power - " + pm.characterPrefabList[i].GetComponent<DragControls>().power + "\n" +
+                    "Buy Now" + "\n" + "Price - 2000" + "\n" + "Current Money - " + pm.currentPoints.ToString() + "Leftover - " +
+                    (pm.currentPoints - 2000).ToString();
+                }
 
-                if (pm.currentPoints - 500 < 0) buyButton.enabled = false;
-                buyButton.onClick.AddListener(delegate
+                if (pm.charactersBought[i] == PlayerManager.BuyState.Bought)
                 {
-                    pm.charactersBought[itemNumber] = PlayerManager.BuyState.Bought;
-                    ReturnToSelection();
-                    UpdateButtons();
-                });
+                    buySelectButtonText.text = "Select";
+
+                    buySelectButton.onClick.AddListener(delegate
+                    {
+                        pm.selectedGO = pm.characterPrefabList[i];
+                        mainMenuButtonFunctions.LoadScene("Main Game Scene");
+                    });
+                }
+                else
+                {
+                    if (pm.currentPoints - 2000 >= 0)
+                    {
+                        buySelectButton.onClick.AddListener(delegate
+                        {
+                            pm.charactersBought[i] = PlayerManager.BuyState.Bought;
+                            UpdateData(i);
+                        });
+                    }
+                }
                 break;
         }
+
     }
 }

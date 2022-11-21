@@ -32,6 +32,8 @@ public class BaseManager : SingletonBase<BaseManager>
 
         var playerData = JsonUtility.FromJson<SavePlayerData>(PlayerPrefs.GetString("SavedPlayer"));
 
+        if (playerData == null) return;
+
         if (playerData.playedBefore == 1)
         {
             pm.wasModified = true;

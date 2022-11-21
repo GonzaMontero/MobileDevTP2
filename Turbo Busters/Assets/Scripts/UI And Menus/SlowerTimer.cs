@@ -33,7 +33,7 @@ public class SlowerTimer : MonoBehaviour
 
     private void Update()
     {
-        if (!shouldCountTime)
+        if (shouldCountTime)
         {
             totalTime += Time.deltaTime;
         }
