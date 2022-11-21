@@ -5,11 +5,6 @@ using UnityEngine;
 [System.Serializable]
 public class SavePlayerData
 {
-    public int playedBefore = 0;
-
-    public float volume;
-    public SettingsManager.neonColors colorSelected;
-
     public Dictionary<int, PlayerManager.BuyState> boughtItems;
     public int points;
 }
@@ -18,21 +13,19 @@ public class SavePlayerData
 public class BaseManager : SingletonBase<BaseManager>
 {
     PlayerManager pm;
-    SettingsManager sm;
 
     SavePlayerData savedPlayer;
 
-    int playedBefore = 1;
-
     string datapath;
 
+#pragma warning disable CS0108 // Member hides inherited member; missing new keyword
     void Awake()
+#pragma warning restore CS0108 // Member hides inherited member; missing new keyword
     {
         base.Awake();
         pm = PlayerManager.instance;
-        sm = SettingsManager.instance;
 
-        datapath = Application.persistentDataPath + " data.bin";
+        datapath = Application.persistentDataPath + "GameData.bin";
 
         SavePlayerData playerData = FileSaveSystem<SavePlayerData>.LoadDataFromFile(datapath);
 
@@ -44,17 +37,12 @@ public class BaseManager : SingletonBase<BaseManager>
 
         pm.charactersBought = playerData.boughtItems;
         pm.currentPoints = playerData.points;
-        sm.currentNeonColor = playerData.colorSelected;
-        sm.currentVolume = playerData.volume;
     }
 
     private void OnApplicationQuit()
     {
         savedPlayer = new SavePlayerData()
         {
-            playedBefore = playedBefore,
-            volume = sm.currentVolume,
-            colorSelected = sm.currentNeonColor,
             boughtItems = pm.charactersBought,
             points = pm.currentPoints
         };

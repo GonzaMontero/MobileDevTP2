@@ -34,7 +34,7 @@ public class ShperePositionCalculator : MonoBehaviour
 
     IEnumerator WaitForFinishPlay()
     {
-        if (system.isPlaying)
+        while (system.isPlaying)
             yield return null;
 
         transform.position = camTransform.position + (Random.insideUnitSphere * 30);

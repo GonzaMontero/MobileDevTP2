@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -57,9 +55,10 @@ public class CharacterSelection : MonoBehaviour
         {
             default:
             case 0:
-                nameText.text = "Circle";
+                nameText.text = "Blue";
+                nameText.color = pm.playerColorArray[i];
 
-                updateText.text = "Power - " + pm.characterPrefabList[i].GetComponent<DragControls>().power + "\n" +
+                updateText.text = "Power - 10" + "\n" +
                     "Bought" + "\n" + "Price - 0" + "\n" + "Current Money - " + pm.currentPoints.ToString() + "Leftover - " +
                     (pm.currentPoints - 0).ToString();
 
@@ -69,23 +68,25 @@ public class CharacterSelection : MonoBehaviour
 
                     buySelectButton.onClick.AddListener(delegate
                     {
-                        pm.selectedGO = pm.characterPrefabList[i];
+                        pm.selectedColor = pm.playerColorArray[i];
+                        pm.speed = 10;
                         mainMenuButtonFunctions.LoadScene("Main Game Scene");
                     });
                 }
                 break;
             case 1:
-                nameText.text = "Square";   
+                nameText.text = "Red";
+                nameText.color = pm.playerColorArray[i];
 
                 if (bought)
                 {
-                    updateText.text = "Power - " + pm.characterPrefabList[i].GetComponent<DragControls>().power + "\n" +
+                    updateText.text = "Power - 15" + "\n" +
                     "Bought" + "\n" + "Price - 500" + "\n" + "Current Money - " + pm.currentPoints.ToString() + "Leftover - " +
                      (pm.currentPoints - 500).ToString();
                 }
                 else
                 {
-                    updateText.text = "Power - " + pm.characterPrefabList[i].GetComponent<DragControls>().power + "\n" +
+                    updateText.text = "Power - 15" + "\n" +
                     "Buy Now" + "\n" + "Price - 500" + "\n" + "Current Money - " + pm.currentPoints.ToString() + "Leftover - " +
                     (pm.currentPoints - 500).ToString();
                 }
@@ -97,7 +98,8 @@ public class CharacterSelection : MonoBehaviour
 
                     buySelectButton.onClick.AddListener(delegate
                     {
-                        pm.selectedGO = pm.characterPrefabList[i];
+                        pm.selectedColor = pm.playerColorArray[i];
+                        pm.speed = 15;
                         mainMenuButtonFunctions.LoadScene("Main Game Scene");
                     });
                 }
@@ -116,17 +118,18 @@ public class CharacterSelection : MonoBehaviour
                 }
                 break;
             case 2:
-                nameText.text = "Triangle";
+                nameText.text = "Green";
+                nameText.color = pm.playerColorArray[i];
 
                 if (bought)
                 {
-                    updateText.text = "Power - " + pm.characterPrefabList[i].GetComponent<DragControls>().power + "\n" +
+                    updateText.text = "Power - 20" + "\n" +
                     "Bought" + "\n" + "Price - 1000" + "\n" + "Current Money - " + pm.currentPoints.ToString() + "Leftover - " +
                      (pm.currentPoints - 1000).ToString();
                 }
                 else
                 {
-                    updateText.text = "Power - " + pm.characterPrefabList[i].GetComponent<DragControls>().power + "\n" +
+                    updateText.text = "Power - 20" + "\n" +
                     "Buy Now" + "\n" + "Price - 1000" + "\n" + "Current Money - " + pm.currentPoints.ToString() + "Leftover - " +
                     (pm.currentPoints - 1000).ToString();
                 }
@@ -137,7 +140,8 @@ public class CharacterSelection : MonoBehaviour
 
                     buySelectButton.onClick.AddListener(delegate
                     {
-                        pm.selectedGO = pm.characterPrefabList[i];
+                        pm.selectedColor = pm.playerColorArray[i];
+                        pm.speed = 20;
                         mainMenuButtonFunctions.LoadScene("Main Game Scene");
                     });
                 }
@@ -156,17 +160,18 @@ public class CharacterSelection : MonoBehaviour
                 }
                 break;
             case 3:
-                nameText.text = "Special";
+                nameText.text = "Yellow";
+                nameText.color = pm.playerColorArray[i];
 
                 if (bought)
                 {
-                    updateText.text = "Power - " + pm.characterPrefabList[i].GetComponent<DragControls>().power + "\n" +
+                    updateText.text = "Power - 30" + "\n" +
                     "Bought" + "\n" + "Price - 2000" + "\n" + "Current Money - " + pm.currentPoints.ToString() + "Leftover - " +
                      (pm.currentPoints - 2000).ToString();
                 }
                 else
                 {
-                    updateText.text = "Power - " + pm.characterPrefabList[i].GetComponent<DragControls>().power + "\n" +
+                    updateText.text = "Power - 30" + "\n" +
                     "Buy Now" + "\n" + "Price - 2000" + "\n" + "Current Money - " + pm.currentPoints.ToString() + "Leftover - " +
                     (pm.currentPoints - 2000).ToString();
                 }
@@ -177,7 +182,8 @@ public class CharacterSelection : MonoBehaviour
 
                     buySelectButton.onClick.AddListener(delegate
                     {
-                        pm.selectedGO = pm.characterPrefabList[i];
+                        pm.selectedColor = pm.playerColorArray[i];
+                        pm.speed = 30;
                         mainMenuButtonFunctions.LoadScene("Main Game Scene");
                     });
                 }

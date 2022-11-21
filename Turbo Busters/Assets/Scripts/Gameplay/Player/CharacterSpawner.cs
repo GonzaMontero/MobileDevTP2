@@ -10,7 +10,8 @@ public class CharacterSpawner : MonoBehaviour
     {
         pm = PlayerManager.instance;
 
-        GameObject go = Instantiate(pm.selectedGO, transform);
+        GameObject go = Instantiate(pm.characterPrefab, transform);
+        go.GetComponentInChildren<SpriteRenderer>().color = pm.selectedColor;
         go.transform.position = Vector3.zero;
     }
 }

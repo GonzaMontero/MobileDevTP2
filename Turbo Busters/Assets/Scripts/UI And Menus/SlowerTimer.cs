@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class SlowerTimer : MonoBehaviour
 {
@@ -13,11 +14,11 @@ public class SlowerTimer : MonoBehaviour
 
     [Header("Ending UI")]
     public GameObject loseGameParent;
-    public TMPro.TextMeshProUGUI endGameText;
+    public TextMeshProUGUI endGameText;
 
     [Header("Points")]
     public int totalPoints;
-    public TMPro.TextMeshProUGUI pointsText;
+    public TextMeshProUGUI pointsText;
 
 
     float timeRemaining;
@@ -25,10 +26,14 @@ public class SlowerTimer : MonoBehaviour
 
     private void Start()
     {
+        pointsText.text = "0";
+
         timeRemaining = totalTimeGiven;
         totalTime = 0;
 
         shouldCountTime = true;
+
+        GameObject.FindGameObjectWithTag("Main Player").GetComponent<DragControls>().onHitEvent.AddListener(OnCollisionEvent);
     }
 
     private void Update()

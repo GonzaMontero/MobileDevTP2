@@ -12,6 +12,7 @@ public class DragControls : MonoBehaviour
     public LineRenderer lineRenderer;
 
     public UnityEvent onDragReleaseEvent;
+    public UnityEvent onHitEvent;
 
     private Vector3 dragStartPos;
 
@@ -21,6 +22,9 @@ public class DragControls : MonoBehaviour
     {
         if (onDragReleaseEvent == null)
             onDragReleaseEvent = new UnityEvent();
+
+        if (onHitEvent == null)
+            onHitEvent = new UnityEvent();
 
         rigidBody.constraints = RigidbodyConstraints2D.FreezePosition;
     }
@@ -52,7 +56,9 @@ public class DragControls : MonoBehaviour
 
     void DragStart()
     {
-        dragStartPos = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x,touch.position.y));
+        Vector3 screenPos = new Vector3(touch.position.x, touch.position.y, 0);
+
+        dragStartPos = Camera.main.ScreenToWorldPoint(screenPos);
         dragStartPos.z = 0f;
 
         lineRenderer.positionCount = 1;
@@ -61,7 +67,9 @@ public class DragControls : MonoBehaviour
 
     void Dragging()
     {
-        Vector3 draggingPos = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y));
+        Vector3 screenPos = new Vector3(touch.position.x, touch.position.y,0);
+
+        Vector3 draggingPos = Camera.main.ScreenToWorldPoint(screenPos);
         draggingPos.z = 0f;
 
         lineRenderer.positionCount = 2;
@@ -74,7 +82,8 @@ public class DragControls : MonoBehaviour
 
         lineRenderer.positionCount = 0;
 
-        Vector3 dragReleasePosition = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y));
+        Vector3 screenPos = new Vector3(touch.position.x, touch.position.y, 0);
+        Vector3 dragReleasePosition = Camera.main.ScreenToWorldPoint(screenPos);
         dragReleasePosition.z = 0f;
 
         Vector3 force = dragStartPos - dragReleasePosition;
@@ -84,8 +93,9 @@ public class DragControls : MonoBehaviour
         rigidBody.AddForce(clampedForce, ForceMode2D.Impulse);
     }
 
-    public void OnHitEvent()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         rigidBody.constraints = RigidbodyConstraints2D.FreezePosition;
+        onHitEvent?.Invoke();
     }
 }
