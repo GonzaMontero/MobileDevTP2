@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 5718218621091862347}
   m_Layer: 0
   m_Name: Star
-  m_TagString: Untagged
+  m_TagString: Main Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -182,7 +182,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   power: 25
-  maxDrag: 5
+  maxDrag: 50
   rigidBody: {fileID: 0}
   lineRenderer: {fileID: 2323491251977202857}
   onDragReleaseEvent:

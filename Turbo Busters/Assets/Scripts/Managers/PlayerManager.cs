@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerManager : SingletonBase<PlayerManager>
 {
+    [System.Serializable]
     public enum BuyState {Bought=0, NotBought }
 
     public Dictionary<int, BuyState> charactersBought = new Dictionary<int, BuyState>();
@@ -16,10 +17,8 @@ public class PlayerManager : SingletonBase<PlayerManager>
 
     public bool wasModified = false;
 
-    private void Start()
+    public void SetStarterDictionary()
     {
-        if (wasModified) return;
-
         charactersBought.Add(0, BuyState.Bought);
         charactersBought.Add(1, BuyState.NotBought);
         charactersBought.Add(2, BuyState.NotBought);

@@ -48,9 +48,10 @@ public class CharacterSelection : MonoBehaviour
     }
 
     public void UpdateData(int i)
-    {
-       
+    {     
         bool bought = (pm.charactersBought[i] == PlayerManager.BuyState.Bought);
+
+        buySelectButton.onClick.RemoveAllListeners();
 
         switch (i)
         {
@@ -102,6 +103,8 @@ public class CharacterSelection : MonoBehaviour
                 }
                 else
                 {
+                    buySelectButtonText.text = "Buy";
+
                     if (pm.currentPoints - 500 >= 0)
                     {
                         buySelectButton.onClick.AddListener(delegate
@@ -140,6 +143,8 @@ public class CharacterSelection : MonoBehaviour
                 }
                 else
                 {
+                    buySelectButtonText.text = "Buy";
+
                     if (pm.currentPoints - 1000 >= 0)
                     {
                         buySelectButton.onClick.AddListener(delegate
@@ -178,6 +183,8 @@ public class CharacterSelection : MonoBehaviour
                 }
                 else
                 {
+                    buySelectButtonText.text = "Buy";
+
                     if (pm.currentPoints - 2000 >= 0)
                     {
                         buySelectButton.onClick.AddListener(delegate

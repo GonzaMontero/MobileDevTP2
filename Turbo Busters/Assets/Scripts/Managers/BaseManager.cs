@@ -22,7 +22,9 @@ public class BaseManager : SingletonBase<BaseManager>
 
     SavePlayerData savedPlayer;
 
-    int playedBefore;
+    int playedBefore = 1;
+
+    string datapath;
 
     void Awake()
     {
@@ -30,21 +32,20 @@ public class BaseManager : SingletonBase<BaseManager>
         pm = PlayerManager.instance;
         sm = SettingsManager.instance;
 
-        var playerData = JsonUtility.FromJson<SavePlayerData>(PlayerPrefs.GetString("SavedPlayer"));
+        datapath = Application.persistentDataPath + " data.bin";
 
-        if (playerData == null) return;
+        SavePlayerData playerData = FileSaveSystem<SavePlayerData>.LoadDataFromFile(datapath);
 
-        if (playerData.playedBefore == 1)
+        if (playerData == null)
         {
-            pm.wasModified = true;
-            pm.charactersBought = playerData.boughtItems;
-            pm.currentPoints = playerData.points;
-            sm.currentNeonColor = playerData.colorSelected;
-            sm.currentVolume = playerData.volume;
-
+            pm.SetStarterDictionary();
+            return;
         }
-        else
-            playedBefore = 1;
+
+        pm.charactersBought = playerData.boughtItems;
+        pm.currentPoints = playerData.points;
+        sm.currentNeonColor = playerData.colorSelected;
+        sm.currentVolume = playerData.volume;
     }
 
     private void OnApplicationQuit()
@@ -58,7 +59,6 @@ public class BaseManager : SingletonBase<BaseManager>
             points = pm.currentPoints
         };
 
-        PlayerPrefs.SetString("SavedPlayer", JsonUtility.ToJson(savedPlayer));
-        PlayerPrefs.Save();
+        FileSaveSystem<SavePlayerData>.SaveDataToFile(savedPlayer,datapath);
     }
 }
