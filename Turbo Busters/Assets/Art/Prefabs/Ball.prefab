@@ -89,7 +89,7 @@ LineRenderer:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
-        value: 0.17391306
+        value: 0.1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -182,10 +182,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   power: 10
-  maxDrag: 50
+  maxDrag: 5
   rigidBody: {fileID: 1881306751393065475}
   lineRenderer: {fileID: 2323491251977202857}
   onDragReleaseEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  onHitEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &1881306751393065479

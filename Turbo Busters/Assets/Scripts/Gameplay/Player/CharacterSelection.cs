@@ -59,7 +59,7 @@ public class CharacterSelection : MonoBehaviour
                 nameText.color = pm.playerColorArray[i];
 
                 updateText.text = "Power - 10" + "\n" +
-                    "Bought" + "\n" + "Price - 0" + "\n" + "Current Money - " + pm.currentPoints.ToString() + "Leftover - " +
+                    "Bought" + "\n" + "Price - 0" + "\n" + "Current Money - " + pm.currentPoints.ToString() + "\n" + "Leftover - " +
                     (pm.currentPoints - 0).ToString();
 
                 if (pm.charactersBought[i] == PlayerManager.BuyState.Bought)
@@ -81,13 +81,13 @@ public class CharacterSelection : MonoBehaviour
                 if (bought)
                 {
                     updateText.text = "Power - 15" + "\n" +
-                    "Bought" + "\n" + "Price - 500" + "\n" + "Current Money - " + pm.currentPoints.ToString() + "Leftover - " +
+                    "Bought" + "\n" + "Price - 500" + "\n" + "Current Money - " + pm.currentPoints.ToString() + "\n" + "Leftover - " +
                      (pm.currentPoints - 500).ToString();
                 }
                 else
                 {
                     updateText.text = "Power - 15" + "\n" +
-                    "Buy Now" + "\n" + "Price - 500" + "\n" + "Current Money - " + pm.currentPoints.ToString() + "Leftover - " +
+                    "Buy Now" + "\n" + "Price - 500" + "\n" + "Current Money - " + pm.currentPoints.ToString() + "\n" + "Leftover - " +
                     (pm.currentPoints - 500).ToString();
                 }
 
@@ -112,6 +112,7 @@ public class CharacterSelection : MonoBehaviour
                         buySelectButton.onClick.AddListener(delegate
                         {
                             pm.charactersBought[i] = PlayerManager.BuyState.Bought;
+                            AchievementManager.instance.FirstUnlockAchievement();
                             UpdateData(i);
                         });
                     }
@@ -124,13 +125,13 @@ public class CharacterSelection : MonoBehaviour
                 if (bought)
                 {
                     updateText.text = "Power - 20" + "\n" +
-                    "Bought" + "\n" + "Price - 1000" + "\n" + "Current Money - " + pm.currentPoints.ToString() + "Leftover - " +
+                    "Bought" + "\n" + "Price - 1000" + "\n" + "Current Money - " + pm.currentPoints.ToString() + "\n" + "Leftover - " +
                      (pm.currentPoints - 1000).ToString();
                 }
                 else
                 {
                     updateText.text = "Power - 20" + "\n" +
-                    "Buy Now" + "\n" + "Price - 1000" + "\n" + "Current Money - " + pm.currentPoints.ToString() + "Leftover - " +
+                    "Buy Now" + "\n" + "Price - 1000" + "\n" + "Current Money - " + pm.currentPoints.ToString() + "\n" + "Leftover - " +
                     (pm.currentPoints - 1000).ToString();
                 }
 
@@ -154,6 +155,7 @@ public class CharacterSelection : MonoBehaviour
                         buySelectButton.onClick.AddListener(delegate
                         {
                             pm.charactersBought[i] = PlayerManager.BuyState.Bought;
+                            AchievementManager.instance.SecondUnlockAchievement();
                             UpdateData(i);
                         });
                     }
@@ -166,13 +168,13 @@ public class CharacterSelection : MonoBehaviour
                 if (bought)
                 {
                     updateText.text = "Power - 30" + "\n" +
-                    "Bought" + "\n" + "Price - 2000" + "\n" + "Current Money - " + pm.currentPoints.ToString() + "Leftover - " +
+                    "Bought" + "\n" + "Price - 2000" + "\n" + "Current Money - " + pm.currentPoints.ToString() + "\n" + "Leftover - " +
                      (pm.currentPoints - 2000).ToString();
                 }
                 else
                 {
                     updateText.text = "Power - 30" + "\n" +
-                    "Buy Now" + "\n" + "Price - 2000" + "\n" + "Current Money - " + pm.currentPoints.ToString() + "Leftover - " +
+                    "Buy Now" + "\n" + "Price - 2000" + "\n" + "Current Money - " + pm.currentPoints.ToString() + "\n" + "Leftover - " +
                     (pm.currentPoints - 2000).ToString();
                 }
 
@@ -196,6 +198,7 @@ public class CharacterSelection : MonoBehaviour
                         buySelectButton.onClick.AddListener(delegate
                         {
                             pm.charactersBought[i] = PlayerManager.BuyState.Bought;
+                            AchievementManager.instance.ThirdUnlockAchievement();
                             UpdateData(i);
                         });
                     }

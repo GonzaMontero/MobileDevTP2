@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -56,9 +54,7 @@ public class DragControls : MonoBehaviour
 
     void DragStart()
     {
-        Vector3 screenPos = new Vector3(touch.position.x, touch.position.y, 0);
-
-        dragStartPos = Camera.main.ScreenToWorldPoint(screenPos);
+        dragStartPos = Camera.main.ScreenToWorldPoint(touch.position);
         dragStartPos.z = 0f;
 
         lineRenderer.positionCount = 1;
@@ -67,9 +63,7 @@ public class DragControls : MonoBehaviour
 
     void Dragging()
     {
-        Vector3 screenPos = new Vector3(touch.position.x, touch.position.y,0);
-
-        Vector3 draggingPos = Camera.main.ScreenToWorldPoint(screenPos);
+        Vector3 draggingPos = Camera.main.ScreenToWorldPoint(touch.position);
         draggingPos.z = 0f;
 
         lineRenderer.positionCount = 2;
@@ -82,8 +76,7 @@ public class DragControls : MonoBehaviour
 
         lineRenderer.positionCount = 0;
 
-        Vector3 screenPos = new Vector3(touch.position.x, touch.position.y, 0);
-        Vector3 dragReleasePosition = Camera.main.ScreenToWorldPoint(screenPos);
+        Vector3 dragReleasePosition = Camera.main.ScreenToWorldPoint(touch.position);
         dragReleasePosition.z = 0f;
 
         Vector3 force = dragStartPos - dragReleasePosition;
