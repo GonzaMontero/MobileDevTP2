@@ -14,8 +14,8 @@ TagManager:
   - Water
   - UI
   - Post-Process Objects
-  - 
-  - 
+  - Enemy
+  - Bullet
   - 
   - 
   - 
@@ -42,4 +42,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Foreground
+    uniqueID: 519033015
     locked: 0

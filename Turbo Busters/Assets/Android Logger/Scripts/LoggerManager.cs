@@ -1,8 +1,7 @@
-using System;
 using UnityEngine;
-using UnityEngine.Events;
+using Scripts.Utilities;
 
-public class LoggerManager : SingletonBase<LoggerManager>
+public class LoggerManager : Singleton<LoggerManager>
 {
     private AndroidLoggerManager androidLogs;
     private LogReaderManager fileManagerAndroid;
@@ -18,6 +17,7 @@ public class LoggerManager : SingletonBase<LoggerManager>
         fileManagerAndroid = new LogReaderManager();
         androidLogs.OnAndroidCall += fileManagerAndroid.WriteFile;
     }
+
     private void WriteFile(string msg)
     {
         if (Application.platform != RuntimePlatform.Android)
@@ -27,6 +27,7 @@ public class LoggerManager : SingletonBase<LoggerManager>
         }
         fileManagerAndroid.WriteFile(msg + '\n');
     }
+
     public void SendLog(string msg)
     {
         if (Application.platform != RuntimePlatform.Android)
@@ -37,6 +38,7 @@ public class LoggerManager : SingletonBase<LoggerManager>
         androidLogs.AndroidLog(msg);
         WriteFile(msg);
     }
+
     public void CallClear()
     {
         if (Application.platform != RuntimePlatform.Android)
@@ -46,6 +48,7 @@ public class LoggerManager : SingletonBase<LoggerManager>
         }
         fileManagerAndroid.ClearFile();
     }
+
     public string GetFile()
     {
         if (Application.platform != RuntimePlatform.Android)

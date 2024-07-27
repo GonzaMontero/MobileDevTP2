@@ -1,3 +1,4 @@
+using Scripts.Utilities;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,7 +19,7 @@ class AndroidPluginCallback : AndroidJavaProxy
     }
 }
 
-public class AlertDialogueManager : SingletonBase<AlertDialogueManager>
+public class AlertDialogueManager : Singleton<AlertDialogueManager>
 {
     AndroidJavaClass unityClass;
     AndroidJavaObject unityActivity;
@@ -44,6 +45,7 @@ public class AlertDialogueManager : SingletonBase<AlertDialogueManager>
             Debug.LogError("Plugin Instance is Null");
             return;
         }
+
         pluginInstance.CallStatic("recieveUnityActivity", unityActivity);
     }
 
