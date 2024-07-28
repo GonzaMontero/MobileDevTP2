@@ -85,10 +85,15 @@ namespace Scripts.Gameplay.Managers
             Instantiate(prefabToSpawn, PathManager.Get().StartPoint.position, Quaternion.identity, EnemyHolder.transform);
         }
 
+        public int GetCurrentWave()
+        {
+            return currentWave;        
+        }
+
         #region Events
 
         private void EnemyDestroyed()
-        {
+        {            
             enemiesAlive--;
         }
 

@@ -17,7 +17,6 @@ namespace Scripts.Gameplay.Turrets
         public float TargetingRange = 5f;
         public float RotationSpeed = 5f;
         public LayerMask EnemyMask;
-
         public float BulletsPerSecond = 1f;
 
 

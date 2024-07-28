@@ -11,15 +11,20 @@ namespace Scripts.Gameplay.Enemies
         [Header("Attributes")]
         public float MoveSpeed = 2f;
         public int Health = 2;
+        public int CurrencyWorth = 50;
 
         private Rigidbody2D rb;
         private Transform targetPoint;
         private int pathIndex = 0;
+        private bool isDead = false;
+
+        private float baseSpeed;
 
         private void Start()
         {
             targetPoint = PathManager.Get().PathPoints[pathIndex];
             rb = GetComponent<Rigidbody2D>();
+            baseSpeed = MoveSpeed;
         }
 
         private void Update()
@@ -52,11 +57,23 @@ namespace Scripts.Gameplay.Enemies
         {
             Health -= damage;
 
-            if(Health <= 0)
+            if(Health <= 0 && !isDead)
             {
                 Destroy(gameObject);
+                isDead = true;
+                CurrencyManager.Get().AddCurrentCurrency(CurrencyWorth);
                 EnemyManager.OnEnemyDestroyed.Invoke();
             }
+        }
+
+        public void UpdateSpeed(float newSpeed)
+        {
+            MoveSpeed = newSpeed;
+        }
+
+        public void ResetSpeed()
+        {
+            MoveSpeed = baseSpeed;
         }
     }
 }
