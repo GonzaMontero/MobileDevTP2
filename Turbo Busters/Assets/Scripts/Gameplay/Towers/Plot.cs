@@ -11,7 +11,8 @@ namespace Scripts.Gameplay.Turrets
         public Color StartingColor;
         public Color SelectedColor;
 
-        private GameObject tower;
+        private GameObject towerObject;
+        private Turret turret;
         private SpriteRenderer spriteRenderer;
 
         private void Start()
@@ -25,8 +26,9 @@ namespace Scripts.Gameplay.Turrets
             if (EventSystem.current.IsPointerOverGameObject()) 
                 return;
 
-            if (tower !=  null)
+            if (turret !=  null)
             {
+                turret.HandleUI();
                 return;
             }
             else
@@ -36,7 +38,8 @@ namespace Scripts.Gameplay.Turrets
                 if (!CurrencyManager.Get().SpendCurrency(towerToBuild.Cost))
                     return;
 
-                tower = Instantiate(towerToBuild.Prefab, transform.position, Quaternion.identity);
+                towerObject = Instantiate(towerToBuild.Prefab, transform.position, Quaternion.identity);
+                turret = towerObject.GetComponentInChildren<Turret>();
                 spriteRenderer.color = SelectedColor;
             }
         }

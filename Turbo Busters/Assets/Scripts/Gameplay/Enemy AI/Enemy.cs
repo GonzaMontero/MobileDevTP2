@@ -36,6 +36,7 @@ namespace Scripts.Gameplay.Enemies
                 if(pathIndex == PathManager.Get().PathPoints.Length)
                 {
                     EnemyManager.OnEnemyDestroyed.Invoke();
+                    HealthManager.OnEnemyPassed.Invoke();
                     Destroy(gameObject);
                     return;
                 }

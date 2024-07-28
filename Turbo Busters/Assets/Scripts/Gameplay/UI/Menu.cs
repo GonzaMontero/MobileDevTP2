@@ -12,6 +12,7 @@ namespace Scripts.Gameplay.UI
         [Header("References")]
         public TextMeshProUGUI CurrencyText;
         public TextMeshProUGUI WaveText;
+        public TextMeshProUGUI HealthText;
         public GameObject ButtonPrototype;
         public Transform ButtonHolder;
 
@@ -37,6 +38,7 @@ namespace Scripts.Gameplay.UI
         {
             CurrencyText.text = CurrencyManager.Get().GetCurrentCurrency() + "$";
             WaveText.text = "Wave " + EnemyManager.Get().GetCurrentWave();
+            HealthText.text = "Health " + HealthManager.Get().PlayerHealth;
         }
 
         public void InteractMenu()
@@ -45,6 +47,13 @@ namespace Scripts.Gameplay.UI
                 ButtonHolder.gameObject.SetActive(false);
             else
                 ButtonHolder.gameObject.SetActive(true);
+        }
+
+        public void CloseText()
+        {
+            CurrencyText.gameObject.SetActive(false);
+            WaveText.gameObject.SetActive(false);
+            HealthText.gameObject.SetActive(false);
         }
     }
 }

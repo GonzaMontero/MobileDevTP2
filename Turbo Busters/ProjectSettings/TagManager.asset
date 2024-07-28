@@ -16,7 +16,7 @@ TagManager:
   - Post-Process Objects
   - Enemy
   - Bullet
-  - 
+  - UI
   - 
   - 
   - 
@@ -45,4 +45,7 @@ TagManager:
     locked: 0
   - name: Foreground
     uniqueID: 519033015
+    locked: 0
+  - name: UI
+    uniqueID: 3244605011
     locked: 0

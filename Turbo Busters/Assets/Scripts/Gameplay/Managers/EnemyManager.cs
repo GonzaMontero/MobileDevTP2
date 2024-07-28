@@ -16,12 +16,14 @@ namespace Scripts.Gameplay.Managers
         public float EnemiesPerSecond = 0.5f;
         public float TimeBetweenWaves = 5f;
         public float DifficultyScaling = 0.75f;
+        public float MaxEnemiesPerSecond = 15f;
 
         [Header("Events")]
         public static UnityEvent OnEnemyDestroyed = new UnityEvent();
 
         private int currentWave = 1;
         private float timeSinceLastSpawn;
+        private float enemiesPerSecond;
         private int enemiesAlive;
         private int enemiesLeftToSpawn;
         private bool isSpawning = false;
@@ -30,6 +32,7 @@ namespace Scripts.Gameplay.Managers
         {
             base.Awake();
             OnEnemyDestroyed.AddListener(EnemyDestroyed);
+            enemiesPerSecond = EnemiesPerSecond;
         }
 
         private void Start()
@@ -44,7 +47,7 @@ namespace Scripts.Gameplay.Managers
 
             timeSinceLastSpawn += Time.deltaTime;
 
-            if(timeSinceLastSpawn >= (1f / EnemiesPerSecond) && enemiesLeftToSpawn > 0)
+            if(timeSinceLastSpawn >= (1f / enemiesPerSecond) && enemiesLeftToSpawn > 0)
             {
                 SpawnEnemy();
                 enemiesLeftToSpawn--;
@@ -64,6 +67,7 @@ namespace Scripts.Gameplay.Managers
 
             isSpawning = true;
             enemiesLeftToSpawn = EnemiesPerWave();
+            enemiesPerSecond = EnemieSPerSecond();
         }
 
         private void EndWave()
@@ -79,9 +83,17 @@ namespace Scripts.Gameplay.Managers
             return Mathf.RoundToInt(BaseEnemies * Mathf.Pow(currentWave, DifficultyScaling));
         }
 
+        private float EnemieSPerSecond()
+        {
+            return Mathf.Clamp(enemiesPerSecond * Mathf.Pow(currentWave, DifficultyScaling), 
+                0f, MaxEnemiesPerSecond);
+        }
+
         private void SpawnEnemy()
         {
-            GameObject prefabToSpawn = EnemyPrefabs[0];
+            int index = Random.Range(0, EnemyPrefabs.Length);
+
+            GameObject prefabToSpawn = EnemyPrefabs[index];
             Instantiate(prefabToSpawn, PathManager.Get().StartPoint.position, Quaternion.identity, EnemyHolder.transform);
         }
 

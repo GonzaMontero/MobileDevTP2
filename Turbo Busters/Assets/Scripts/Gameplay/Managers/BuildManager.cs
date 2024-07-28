@@ -9,7 +9,7 @@ namespace Scripts.Gameplay.Managers
         [Header("Referencies")]
         public TurretSerializable[] Towers;
 
-        private int selectedTower = 0;
+        private int selectedTower;
 
         public TurretSerializable GetSelectedTower()
         {

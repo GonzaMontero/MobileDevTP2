@@ -7,7 +7,5 @@ namespace Scripts.Gameplay.Managers
     {
         public Transform StartPoint;
         public Transform[] PathPoints;
-
-
     }
 }
