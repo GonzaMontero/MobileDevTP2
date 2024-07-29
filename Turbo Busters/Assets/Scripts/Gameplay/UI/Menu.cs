@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace Scripts.Gameplay.UI
 {
-    public class Menu : MonoBehaviour
+    public class MenuGameplay : MonoBehaviour
     {
         [Header("References")]
         public TextMeshProUGUI CurrencyText;

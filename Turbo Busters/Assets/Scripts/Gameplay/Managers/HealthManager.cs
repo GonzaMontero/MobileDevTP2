@@ -12,7 +12,7 @@ namespace Scripts.Gameplay.Managers
         [Header("Attributes")]
         public int PlayerHealth;
         public GameEndUIHandler GameEndUIHandler;
-        public Menu Menu;
+        public MenuGameplay Menu;
 
         [Header("Unity Events")]
         public static UnityEvent OnEnemyPassed = new UnityEvent();

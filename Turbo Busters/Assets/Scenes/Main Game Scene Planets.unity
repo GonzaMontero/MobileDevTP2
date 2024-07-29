@@ -14485,7 +14485,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac98a5d70a0a1a24693acd818f2d1bb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerHealth: 1
+  PlayerHealth: 20
   GameEndUIHandler: {fileID: 1759350451}
   Menu: {fileID: 795933606}
 --- !u!1001 &2128287118
