@@ -14,17 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedAppIndex: 0
   clientTokens:
-  - 
+  - a338362490ed5fe2aff2e3203d48773f
   appIds:
-  - 0
+  - 411119668607982
   appLabels:
-  - App Name
+  - Turbo Bumpers - Tower Defense
   cookie: 1
   logging: 1
   status: 1
   xfbml: 0
   frictionlessRequests: 1
-  androidKeystorePath: 
+  androidKeystorePath: C:/Users/Gonzalo Montero/Desktop/Important Files/Keys Mobiles/Keydef/user.keystore
   iosURLSuffix: 
   appLinkSchemes:
   - list: []

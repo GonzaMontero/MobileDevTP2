@@ -14487,7 +14487,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerHealth: 20
   GameEndUIHandler: {fileID: 1759350451}
-  Menu: {fileID: 795933606}
+  Menu: {fileID: 0}
 --- !u!1001 &2128287118
 PrefabInstance:
   m_ObjectHideFlags: 0

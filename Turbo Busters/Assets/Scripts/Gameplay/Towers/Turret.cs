@@ -98,12 +98,6 @@ namespace Scripts.Gameplay.Turrets
             }
         }
 
-        private void OnDrawGizmosSelected()
-        {
-            Handles.color = Color.cyan;
-            Handles.DrawWireDisc(transform.position,transform.forward, TargetingRange);
-        }
-
         public void HandleUI()
         {
             if(UpgradeUI.activeSelf)
