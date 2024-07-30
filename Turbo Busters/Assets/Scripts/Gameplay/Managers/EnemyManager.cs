@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using Scripts.Utilities;
 using System.Collections;
+using GooglePlayGames;
 
 namespace Scripts.Gameplay.Managers
 {
@@ -75,7 +76,30 @@ namespace Scripts.Gameplay.Managers
             isSpawning = false;
             timeSinceLastSpawn = 0f;
             currentWave++;
+
+            if(currentWave == 5)
+                AchievementManagers.Get().UnlockFirstAchievement();
+            else if (currentWave == 10)
+                AchievementManagers.Get().UnlockSecondAchievement();
+            else if (currentWave == 15)
+                AchievementManagers.Get().UnlockThirdAchievement();
+
+            if (PlayGamesPlatform.Instance.IsAuthenticated())
+                Social.ReportScore(currentWave, GPGSIds.leaderboard_global_leaderboard, LeaderBoardUpdate);
+
             StartCoroutine(StartWave());
+        }
+
+        private void LeaderBoardUpdate(bool success)
+        {
+            if (success)
+            {
+                Debug.Log("Leaderboard Updated");
+            }
+            else
+            {
+                Debug.Log("Leaderboard Not Updated");
+            }
         }
 
         private int EnemiesPerWave()

@@ -2,6 +2,7 @@ using Scripts.Gameplay.Managers;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,6 +17,8 @@ namespace Scripts.Gameplay.Turrets
         public Transform BulletParent;
         public GameObject UpgradeUI;
         public Button UpgradeButton;
+        public Button CloseButton;
+        public TextMeshProUGUI UpgradeText;
         
         [Header("Attributes")]
         public float TargetingRange = 5f;
@@ -38,6 +41,7 @@ namespace Scripts.Gameplay.Turrets
             targetingRangeBase = TargetingRange;
 
             UpgradeButton.onClick.AddListener(Upgrade);
+            CloseButton.onClick.AddListener(HandleUI);
         }
 
         private void Update()
@@ -116,7 +120,7 @@ namespace Scripts.Gameplay.Turrets
                 BulletsPerSecond = CalculateBPS();
                 TargetingRange = CalculateRange();
                 HandleUI();
-                Debug.Log("New Cost " + BaseUpgradeCost);
+                UpgradeText.text = "Up " + CalculateCost();
             }           
         }
 

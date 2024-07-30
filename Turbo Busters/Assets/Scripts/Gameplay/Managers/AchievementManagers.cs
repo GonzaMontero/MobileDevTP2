@@ -12,21 +12,21 @@ namespace Scripts.Gameplay
         public void UnlockFirstAchievement()
         {
 #if !PLATFORM_IOS
-            PlayGamesPlatform.Instance.ReportProgress(GPGSIds.achievement_first_unlock, 100f, success => { });
+            PlayGamesPlatform.Instance.ReportProgress(GPGSIds.achievement_wave_runner, 100f, success => { });
 #endif
         }
 
         public void UnlockSecondAchievement()
         {
 #if !PLATFORM_IOS
-            PlayGamesPlatform.Instance.ReportProgress(GPGSIds.achievement_follow_the_unlocks, 100f, success => { });
+            PlayGamesPlatform.Instance.ReportProgress(GPGSIds.achievement_wave_splitter, 100f, success => { });
 #endif
         }
 
         public void UnlockThirdAchievement()
         {
 #if !PLATFORM_IOS
-                PlayGamesPlatform.Instance.ReportProgress(GPGSIds.achievement_finishing_up, 100f, success => { });
+                PlayGamesPlatform.Instance.ReportProgress(GPGSIds.achievement_wave_freerunner, 100f, success => { });
 #endif
         }
     }

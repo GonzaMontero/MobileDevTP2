@@ -1,9 +1,11 @@
 lastUpgrade=01101
 proj.pluginVersion=0.11.01
-proj.AppId=671288777781
-and.BundleId=com.DefaultCompany.TurboBusters
+proj.AppId=690247592333
+and.BundleId=com.GM.TurboBusters
 proj.classDir=Assets
 proj.ConstantsClassName=GPGSIds
-and.ResourceData=%3c%3fxml+version%3d%221.0%22+encoding%3d%22utf-8%22%3f%3e%0d%0a%3c%21--Google+Play+game+services+IDs.+Save+this+file+as+res%2fvalues%2fgames-ids.xml+in+your+project.--%3e%0d%0a%3cresources%3e%0d%0a++%3c%21--app_id--%3e%0d%0a++%3cstring+name%3d%22app_id%22+translatable%3d%22false%22%3e671288777781%3c%2fstring%3e%0d%0a++%3c%21--package_name--%3e%0d%0a++%3cstring+name%3d%22package_name%22+translatable%3d%22false%22%3ecom.DefaultCompany.TurboBusters%3c%2fstring%3e%0d%0a++%3c%21--achievement+First+Unlock%21--%3e%0d%0a++%3cstring+name%3d%22achievement_first_unlock%22+translatable%3d%22false%22%3eCgkItbi338QTEAIQAQ%3c%2fstring%3e%0d%0a++%3c%21--achievement+Follow+The+Unlocks%21--%3e%0d%0a++%3cstring+name%3d%22achievement_follow_the_unlocks%22+translatable%3d%22false%22%3eCgkItbi338QTEAIQAg%3c%2fstring%3e%0d%0a++%3c%21--achievement+Finishing+Up%21--%3e%0d%0a++%3cstring+name%3d%22achievement_finishing_up%22+translatable%3d%22false%22%3eCgkItbi338QTEAIQAw%3c%2fstring%3e%0d%0a%3c%2fresources%3e
-and.ClientId=
+and.ResourceData=%3c%3fxml+version%3d%221.0%22+encoding%3d%22utf-8%22%3f%3e%0d%0a%3c%21--Google+Play+game+services+IDs.+Save+this+file+as+res%2fvalues%2fgames-ids.xml+in+your+project.--%3e%0d%0a%3cresources%3e%0d%0a++%3c%21--app_id--%3e%0d%0a++%3cstring+name%3d%22app_id%22+translatable%3d%22false%22%3e690247592333%3c%2fstring%3e%0d%0a++%3c%21--package_name--%3e%0d%0a++%3cstring+name%3d%22package_name%22+translatable%3d%22false%22%3ecom.GM.TurboBusters%3c%2fstring%3e%0d%0a++%3c%21--achievement+Wave+Runner--%3e%0d%0a++%3cstring+name%3d%22achievement_wave_runner%22+translatable%3d%22false%22%3eCgkIjdPZr4sUEAIQAQ%3c%2fstring%3e%0d%0a++%3c%21--achievement+Wave+Splitter--%3e%0d%0a++%3cstring+name%3d%22achievement_wave_splitter%22+translatable%3d%22false%22%3eCgkIjdPZr4sUEAIQAg%3c%2fstring%3e%0d%0a++%3c%21--achievement+Wave+Freerunner--%3e%0d%0a++%3cstring+name%3d%22achievement_wave_freerunner%22+translatable%3d%22false%22%3eCgkIjdPZr4sUEAIQAw%3c%2fstring%3e%0d%0a++%3c%21--leaderboard+Global+Leaderboard--%3e%0d%0a++%3cstring+name%3d%22leaderboard_global_leaderboard%22+translatable%3d%22false%22%3eCgkIjdPZr4sUEAIQBA%3c%2fstring%3e%0d%0a%3c%2fresources%3e
+and.ClientId=690247592333-k4tove3ud6il65jn4cmave82ktgbeg3m.apps.googleusercontent.com
 android.SetupDone=true
+App.NearbdServiceId=com.GM.TurboBusters
+android.NearbySetupDone=true

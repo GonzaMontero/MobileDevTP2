@@ -141,32 +141,12 @@ public class FacebookHandler : MonoBehaviour
 
     public void FacebookSharefeed()
     {
-        string url = "https:developers.facebook.com/docs/unity/reference/current/FB.ShareLink";
-        FB.ShareLink(
-            new Uri(url),
-            "Checkout COCO 3D channel",
-            "I just watched " + "22" + " times of this channel",
-            null,
-            ShareCallback);
-
+        FB.ShareLink(new System.Uri("https://github.com/GonzaMontero/MobileDevTP2"), "Check it out!",
+            "Project Repository", new System.Uri("https://resocoder.com/wp-content/uploads/2017/01/logoRound512.png"));
     }
 
-    private static void ShareCallback(IShareResult result)
+    public void FacebookFriendRequest()
     {
-        Debug.Log("ShareCallback");
-        SpentCoins(2, "sharelink");
-        if (result.Error != null)
-        {
-            Debug.LogError(result.Error);
-            return;
-        }
-        Debug.Log(result.RawResult);
-    }
-
-    public static void SpentCoins(int coins, string item)
-    {
-        var param = new Dictionary<string, object>();
-        param[AppEventParameterName.ContentID] = item;
-        FB.LogAppEvent(AppEventName.SpentCredits, (float)coins, param);
+        FB.AppRequest("Hey! Come and play this awesome game", title: "Tower Defense");
     }
 }

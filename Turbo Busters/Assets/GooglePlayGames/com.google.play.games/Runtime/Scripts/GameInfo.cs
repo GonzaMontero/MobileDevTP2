@@ -36,10 +36,10 @@ namespace GooglePlayGames {
         private const string UnescapedWebClientId = "WEB_CLIENTID";
         private const string UnescapedNearbyServiceId = "NEARBY_SERVICE_ID";
 
-        public const string ApplicationId = "671288777781"; // Filled in automatically
+        public const string ApplicationId = "690247592333"; // Filled in automatically
         public const string IosClientId = "__IOS_CLIENTID__"; // Filled in automatically
-        public const string WebClientId = ""; // Filled in automatically
-        public const string NearbyConnectionServiceId = "";
+        public const string WebClientId = "690247592333-k4tove3ud6il65jn4cmave82ktgbeg3m.apps.googleusercontent.com"; // Filled in automatically
+        public const string NearbyConnectionServiceId = "com.GM.TurboBusters";
 
         public static bool ApplicationIdInitialized() {
             return !string.IsNullOrEmpty(ApplicationId) && !ApplicationId.Equals(ToEscapedToken(UnescapedApplicationId));
